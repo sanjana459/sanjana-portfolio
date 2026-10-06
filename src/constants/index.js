@@ -7,20 +7,16 @@ const navLinks = [
 
 // headline metrics, all pulled straight from real work
 const counterItems = [
-  { value: 2, suffix: "+", label: "years building production backends" },
-  { value: 31, suffix: "%", label: "more throughput after I retuned the Kafka consumers" },
-  { value: 200, suffix: "ms", label: "peak response, down from a sluggish 1.2s" },
-  { value: 33, suffix: "%", label: "fewer tickets a human ever had to touch" },
+  { value: 2, suffix: "K+", label: "background jobs a day across independently scalable workers" },
+  { value: 30, suffix: "s", label: "end-to-end workflow latency, down from roughly 5 minutes" },
+  { value: 40, suffix: "%", label: "fewer failed and duplicate jobs after retries and idempotency" },
+  { value: 10, suffix: "K", label: "random seeds replayed byte-identical to pin down consistency bugs" },
 ];
 
 const logoIconsList = [
   { imgPath: "/images/logos/company-logo-1.png" },
   { imgPath: "/images/logos/company-logo-2.png" },
   { imgPath: "/images/logos/company-logo-3.png" },
-  { imgPath: "/images/logos/company-logo-4.png" },
-  { imgPath: "/images/logos/company-logo-5.png" },
-  { imgPath: "/images/logos/company-logo-6.png" },
-  { imgPath: "/images/logos/company-logo-7.png" },
 ];
 
 // how I actually work, minus the buzzwords
@@ -28,17 +24,17 @@ const abilities = [
   {
     icon: "🧩",
     title: "I own the whole thing",
-    desc: "I don't write the endpoint and wander off. I stay for the data model, the deploy pipeline, and the dashboards that tell me it's genuinely working at 3am.",
+    desc: "I don't write the endpoint and wander off. I stay for the data model, the queue, the deploy, and the traces that tell me it's holding up at 3am.",
+  },
+  {
+    icon: "🛡️",
+    title: "Built to take a beating",
+    desc: "Idempotent tasks, retries, timeouts, honest failure states. I even write harnesses that inject faults and replay thousands of seeds, because 'it worked once' isn't a guarantee.",
   },
   {
     icon: "⚡",
-    title: "Traffic spikes don't scare me",
-    desc: "Redis caches, Kafka consumers, async pipelines, services that scale sideways instead of falling over. I plan for the busy Tuesday, not just the happy-path demo.",
-  },
-  {
-    icon: "🎯",
     title: "Slow counts as a bug",
-    desc: "Fast is a feature and I treat it like one. Better queries, smarter indexes, and caching that knows when to let go have turned plenty of second-long waits into sub-200ms ones.",
+    desc: "Fast is a feature and I treat it like one. Indexing, batching, and caching that knows when to let go have taken 5-minute workflows down to 30 seconds.",
   },
 ];
 
@@ -49,7 +45,6 @@ const techStackImgs = [
   { name: "PostgreSQL", imgPath: "/images/logos/postgresql.png" },
   { name: "Redis", imgPath: "/images/logos/redis.png" },
   { name: "Docker", imgPath: "/images/logos/docker.png" },
-  { name: "Kafka", imgPath: "/images/logos/kafka.png" },
   { name: "AWS", imgPath: "/images/logos/aws.png" },
 ];
 
@@ -57,128 +52,134 @@ const techStackImgs = [
 const techLayers = [
   {
     tag: "01",
-    layer: "Language & core",
+    layer: "Languages",
     accent: "#f5b544",
-    items: ["Python", "SQL", "Bash", "Git", "Linux", "Asyncio", "Concurrency", "OOP", "Data Structures", "Algorithms"],
+    items: ["Python", "Rust", "SQL"],
   },
   {
     tag: "02",
-    layer: "APIs & services",
+    layer: "Backend & distributed",
     accent: "#2dd4bf",
-    items: ["FastAPI", "Pydantic", "REST", "OpenAPI", "gRPC", "Protocol Buffers", "WebSockets", "SQLAlchemy", "Uvicorn", "JSON"],
+    items: ["FastAPI", "REST APIs", "Celery", "Redis", "MQTT", "asyncio", "Pydantic"],
   },
   {
     tag: "03",
     layer: "Data & storage",
     accent: "#5b9bd5",
-    items: ["PostgreSQL", "PostGIS", "TimescaleDB", "Redis", "Amazon S3", "H3 Spatial Indexing"],
+    items: ["PostgreSQL", "TimescaleDB", "ChromaDB", "Amazon S3"],
   },
   {
     tag: "04",
-    layer: "Messaging & distributed",
-    accent: "#a78bfa",
-    items: ["Kafka", "Redis Streams", "MQTT", "Event-Driven Architecture", "Pub/Sub"],
+    layer: "Cloud & infrastructure",
+    accent: "#fb923c",
+    items: ["AWS ECS", "RDS", "S3", "CloudWatch", "Docker", "Kubernetes", "Linux"],
   },
   {
     tag: "05",
-    layer: "Cloud & DevOps",
-    accent: "#fb923c",
-    items: ["AWS Lambda", "Amazon EKS", "Docker", "Kubernetes", "Helm", "GitHub Actions", "CI/CD", "Trivy"],
+    layer: "DevOps & observability",
+    accent: "#34d399",
+    items: ["Git", "GitHub Actions", "CI/CD", "Pytest", "OpenTelemetry", "Distributed Tracing"],
   },
   {
     tag: "06",
-    layer: "Testing & observability",
-    accent: "#34d399",
-    items: ["pytest", "Locust", "Postman", "OpenTelemetry", "Prometheus", "Grafana", "OAuth2", "JWT", "RBAC"],
+    layer: "Systems & correctness",
+    accent: "#a78bfa",
+    items: ["Wasmtime", "WASM", "Raft", "Deterministic Simulation", "Fault Injection", "Epoch Scheduling"],
   },
 ];
 
-const techStackIcons = [
-  { name: "Python", modelPath: "/models/python-transformed.glb", scale: 0.8, rotation: [0, 0, 0] },
-  { name: "FastAPI / REST APIs", modelPath: "/models/react_logo-transformed.glb", scale: 1, rotation: [0, 0, 0] },
-  { name: "PostgreSQL / Redis", modelPath: "/models/node-transformed.glb", scale: 5, rotation: [0, -Math.PI / 2, 0] },
-  { name: "AWS (Lambda, S3)", modelPath: "/models/three.js-transformed.glb", scale: 0.05, rotation: [0, 0, 0] },
-  { name: "Git / GitHub", modelPath: "/models/git-svg-transformed.glb", scale: 0.05, rotation: [0, -Math.PI / 4, 0] },
-];
+const techStackIcons = [];
 
 // PROJECTS, straight from the resume. Not linked out on purpose.
 const projects = [
   {
     id: "proj-01",
-    name: "Distributed Airspace Deconfliction Service",
+    name: "DETERMINA: Deterministic Simulation Testing",
     org: "University of Massachusetts Amherst",
-    stack: "FastAPI · gRPC · PostGIS · H3",
+    stack: "Rust · Raft · Simulation",
     blurb:
-      "Basically air traffic control for drones. It hands out exclusive claims on chunks of sky so two aircraft never get cleared for the same spot at the same second.",
+      "A time machine for distributed bugs. It runs a Raft-style replicated log inside a fully deterministic simulator, so a failure that shows up on seed 7,431 replays exactly the same way every single time.",
     highlights: [
-      "Partition-tolerant service using lease-based mutual exclusion over H3-indexed airspace volumes, holding 40 decisions per second per node at p99 under 180ms.",
-      "A Jepsen-inspired fault-injection harness that threw 50+ partition, node-failure, and delayed-message scenarios at it. Zero conflicting grants, from 1-second leases all the way up to 300.",
+      "Reproduces byte-identical execution traces across 10,000 random seeds, so nothing is ever a flaky one-off you can't chase down.",
+      "Caught all 30 seeded consistency violations, turning 'it probably works' into something you can actually prove.",
     ],
-    tags: ["FastAPI", "gRPC", "PostgreSQL/PostGIS", "H3", "Distributed Systems"],
-    metric: "p99 · <180ms",
+    tags: ["Rust", "Raft", "Deterministic Simulation", "Distributed Systems"],
+    metric: "10K · seeds",
   },
   {
     id: "proj-02",
-    name: "FHIR Prior-Authorization Conformance Harness",
+    name: "BULKHEAD: Multi-Tenant WASM Isolation",
     org: "University of Massachusetts Amherst",
-    stack: "FHIR R4 · X12 278 · Python",
+    stack: "Wasmtime · WASM · Scheduling",
     blurb:
-      "Healthcare systems are supposed to agree on what a prior-auth request means. This little referee checks whether they actually do, and quietly calls out the ones that don't.",
+      "A bouncer for noisy neighbors. It runs lots of tenants' WebAssembly on one host and makes sure no single one can hog the CPU or drag everybody else down with it.",
     highlights: [
-      "A differential testing system that runs synthetic patient bundles through FHIR R4 CRD, DTR, and PAS workflows and compares them against optional X12 278 representations.",
-      "Caught 3 distinct classes of semantic divergence and hit 80% precision on a 200-pair, rubric-labeled test set built from X12 definitions and payer guides.",
+      "Multi-tenant Wasmtime control plane with epoch-based fair scheduling that survived 200 resource-exhaustion tests without a single host failure.",
+      "Kept CPU allocation within 9.2% of the configured weights, so every tenant actually gets the share it was promised.",
     ],
-    tags: ["FHIR R4", "X12 278", "Differential Testing", "Python"],
-    metric: "80% · precision",
+    tags: ["Rust", "Wasmtime", "WASM", "Scheduling", "Isolation"],
+    metric: "0 · host failures",
   },
 ];
 
-// EXPERIENCE + EDUCATION, from the resume. `logo` renders a coloured monogram.
+// EXPERIENCE + EDUCATION, from the resume. `logo` renders a real logo or a coloured monogram.
 const expCards = [
+  {
+    node: "svc://refyx-ai",
+    logo: { initials: "R", color: "#9a1b2f", img: "/images/logos/refyx.webp" },
+    review:
+      "My current role, building backend services and the AI infrastructure around them: FastAPI APIs, retrieval pipelines, and LLM-driven workflows designed to run reliably in production rather than only in a prototype.",
+    title: "AI & Automation Developer",
+    company: "Refyx AI",
+    date: "Oct 2026 → Present",
+    status: "running",
+    responsibilities: [
+      "Building backend services and AI-driven workflows that bring together FastAPI, PostgreSQL, external APIs, LLMs, and retrieval pipelines for both internal tools and client-facing apps.",
+    ],
+  },
   {
     node: "svc://umass-cics",
     logo: { initials: "UM", color: "#9a1b2f", img: "/images/logos/umass.png" },
     review:
-      "Sensors talk fast and wait for nobody. I built the thing that catches every word, checks it's real, files it away, and fans it out to browsers before anyone notices a delay.",
-    title: "Student Researcher",
+      "A distributed telemetry project: collecting high-frequency data from a fleet of edge devices over MQTT, then making the full inference path observable and understanding how it behaved under failure.",
+    title: "Research Assistant",
     company: "UMass Amherst CICS",
-    date: "Jun 2026 → Present",
-    status: "running",
+    date: "Jun 2026 → Oct 2026",
+    status: "shipped",
     responsibilities: [
-      "Built an async Python (asyncio) ingestion pipeline over MQTT and Mosquitto that validates high-frequency sensor events before they land as telemetry in TimescaleDB hypertables.",
-      "Wrote a FastAPI WebSocket fan-out service backed by Redis Streams that pushes events to a crowd of browser clients at once, holding sub-second delivery even under sustained Locust load tests.",
-      "Added schema and packet-sequence checks, then wired OpenTelemetry metrics into Prometheus and Grafana so malformed, missing, or out-of-order events actually get noticed instead of silently rotting.",
+      "Built a Python/MQTT telemetry pipeline across 6 to 8 distributed edge devices, orchestrating containerized workloads with Kubernetes and storing time-series data in TimescaleDB and PostgreSQL.",
+      "Instrumented the distributed inference path with OpenTelemetry and ran 30+ controlled fault-injection experiments to watch how latency, dropped connections, and recovery rippled across service dependencies.",
     ],
   },
   {
     node: "svc://jeta-software",
     logo: { initials: "JE", color: "#4f86c6", img: "/images/logos/jeta.png" },
     review:
-      "Two years as the person the backend belonged to. I made the APIs quicker, the deploys less scary, and taught a chatbot to field the questions everyone was tired of answering.",
-    title: "Software Developer",
+      "Two years owning a workflow-processing platform end to end. I made long-running jobs reliable, moved heavy processing off the request path, and brought end-to-end latency from five minutes down to thirty seconds.",
+    title: "Software Engineer",
     company: "JETA Software",
     date: "May 2022 → Jun 2024",
     status: "shipped",
     responsibilities: [
-      "Built FastAPI and PostgreSQL REST APIs for inventory and order workflows, then tuned the query plans and composite indexes until core endpoints fell from 850ms to under 500ms.",
-      "Containerized the services with Docker and shipped them to Amazon EKS with Helm, readiness probes, rolling updates, and GitHub Actions, which dragged our release cycle from 3 days down to under 6 hours.",
-      "Added a Redis caching layer with TTLs and explicit invalidation for the hot endpoints, cutting peak response from 1.2s to under 200ms without ever handing anyone stale data.",
-      "Wrote async Python consumers for Kafka on AWS Lambda with idempotency, retry safeguards, and batch tuning, pushing throughput up 31% right when transaction volume was peaking.",
-      "Built a LangChain support chatbot on the OpenAI API with conversation state, structured prompts, and a graceful human handoff, which cut the chats needing a real person by 33%.",
+      "Built Python/FastAPI services for a workflow-processing platform, exposing REST APIs to submit, track, and retrieve long-running jobs backed by durable PostgreSQL state.",
+      "Moved compute-heavy work off the HTTP path with Celery and Redis, running more than 2,000 jobs a day across workers I could scale independently.",
+      "Added idempotent task handling, retry policies, timeouts, and explicit failure states, cutting failed and duplicate processing by around 40%.",
+      "Sped up the hot database and processing paths with indexing, query batching, pagination, and selective caching, dropping end-to-end latency from roughly 5 minutes to 30 seconds.",
+      "Shipped containerized API and worker services on AWS ECS with RDS and S3, wired Pytest into GitHub Actions, and added CloudWatch logging that cut production debugging time by about 35%.",
     ],
   },
   {
     node: "svc://varcons-tech",
     logo: { initials: "VT", color: "#8b5cf6", img: "/images/logos/varcons.jpg" },
     review:
-      "My first real taste of data engineering: taking a slow, manual, six-hour chore nobody enjoyed and turning it into a pipeline that just quietly runs itself.",
-    title: "Software Developer Intern",
+      "An internship building the ingestion backend for a media-monitoring platform: roughly 30,000 news and social records a day, validated, de-duplicated, and normalized before anything reached the database.",
+    title: "Software Engineering Intern",
     company: "Varcons Technologies",
     date: "Mar 2022 → May 2022",
     status: "shipped",
     responsibilities: [
-      "Built scheduled Python and SQL pipelines to pull, validate, and reshape clinical records from a pile of mismatched source systems, shrinking a recurring 6-hour manual job to under an hour.",
-      "Consolidated patient and appointment data into one normalized PostgreSQL schema with real constraints and indexes, which made cross-team reporting about 18% more consistent.",
+      "Built a Python/FastAPI ingestion backend for a media-monitoring platform, pulling in news and social APIs and normalizing about 30,000 content records a day into one shared PostgreSQL model.",
+      "Added scheduled ingestion, schema validation, deduplication, retry handling, and Pytest coverage, cutting duplicate records by roughly 30% even when upstream payloads showed up broken or twice.",
     ],
   },
   {
@@ -192,34 +193,30 @@ const expCards = [
     status: "graduated",
     responsibilities: [
       "Focused on backend systems, distributed computing, and software engineering.",
-      "Coursework and research in event-driven architecture, fault tolerance, and real-time data systems, most of which quietly ended up in the projects above.",
+      "Where DETERMINA and BULKHEAD came from: coursework and research in consensus, fault tolerance, and real-time data systems.",
     ],
   },
 ];
 
-const expLogos = [
-  { name: "logo1", imgPath: "/images/logo1.svg" },
-  { name: "logo2", imgPath: "/images/logo2.svg" },
-  { name: "logo3", imgPath: "/images/logo3.svg" },
-];
+const expLogos = [];
 
-// awards + selections from undergrad at JSS Academy of Technical Education
+// research + awards from JSS Academy of Technical Education
 const achievements = [
   {
     tag: "award://ncait-2024",
     icon: "🏆",
     accent: "#f5b544",
-    title: "Best Paper Award, NCAIT 2024",
+    title: "Best Paper, NCAIT 2024",
     place: "JSS Academy of Technical Education",
-    desc: '"Retrieval-Augmented Generation: A Survey" was picked as the best paper in its track at the 10th National Conference on Advancements in Information Technology.',
+    desc: "Co-authored a survey on Retrieval-Augmented Generation that took Best Paper at the 10th National Conference on Advancements in Information Technology.",
   },
   {
-    tag: "select://kscst-spp-47",
+    tag: "select://kscst-vidtalk",
     icon: "🎖️",
     accent: "#2dd4bf",
-    title: "State-Level Selection, KSCST 47th SPP",
+    title: "KSCST State-Level Selection",
     place: "Karnataka State Council for Science & Technology",
-    desc: "VidTalk, our video-engagement project, was chosen for the state-level exhibition at the 47th Student Project Programme, held at Sharnbasva University, Kalaburagi.",
+    desc: "VidTalk, which I later grew into a multimodal video-question-answering system (speech, OCR, captioning, retrieval, ChromaDB), earned KSCST sponsorship and a spot at the state-level exhibition.",
   },
 ];
 
@@ -228,14 +225,14 @@ const testimonials = [
     name: "Sanjay Pooniya",
     mentions: "Engineering Manager",
     review:
-      "Sanjana was our only backend engineer for over two years, and honestly she carried it. She nearly halved our API latency and shipped a support bot that took a third of the load off the humans. She just takes ownership and runs.",
+      "Sanjana owned a big chunk of our platform for two years, and honestly she carried it. She took a five-minute workflow down to thirty seconds and made our job processing genuinely reliable. She just takes ownership and runs.",
     imgPath: "/images/client1.png",
   },
   {
     name: "Vineet Saddi",
     mentions: "Grad-school peer at UMass",
     review:
-      "One of the sharpest engineers in our cohort. Sanjana doesn't just write code, she thinks the whole system through first. Her backends are clean, well-tested, and clearly built by someone who expects them to last.",
+      "One of the sharpest engineers in our cohort. Sanjana doesn't just write code, she thinks the whole system through first, down to what happens when the network misbehaves. Her stuff is clean, well-tested, and built to last.",
     imgPath: "/images/client2.png",
   },
   {

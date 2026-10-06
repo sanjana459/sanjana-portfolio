@@ -21,6 +21,7 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative overflow-hidden padding-x-lg">
+      <div className="hero-glow" aria-hidden="true" />
       <div className="hero-layout">
         {/* LEFT: content */}
         <header className="hero-text flex flex-col justify-center z-10">
@@ -31,7 +32,8 @@ const Hero = () => {
           <h1 className="mono text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight">
             I build backends
             <br />
-            that stay <span className="text-signal">boring.</span>
+            that stay <span className="text-signal">boring</span>
+            <span className="caret" aria-hidden="true">.</span>
           </h1>
 
           <p className="text-ink/85 mt-6 text-lg md:text-xl max-w-xl leading-relaxed">
@@ -40,11 +42,12 @@ const Hero = () => {
           </p>
 
           <p className="text-muted mt-5 max-w-xl leading-relaxed">
-            Hi, I'm Sanjana. I'm a backend engineer with a fresh MS in Computer
-            Science from UMass Amherst, and a soft spot for the parts of software
-            nobody brags about: the queues, the caches, the APIs quietly holding
-            everything up. I like making slow things fast and fragile things
-            hard to break.
+            Hi, I'm Sanjana, a backend engineer. These days I'm building
+            AI-driven backend services at Refyx AI, and I just wrapped an MS in
+            Computer Science at UMass Amherst. I've got a soft spot for the parts
+            of software nobody brags about: the queues, the caches, the APIs
+            quietly holding everything up. I like making slow things fast and
+            fragile things hard to break.
           </p>
 
           <div className="mt-8 flex items-center gap-5 flex-wrap">
@@ -56,6 +59,10 @@ const Hero = () => {
               or just say hi →
             </a>
           </div>
+
+          <p className="mono text-xs text-faint mt-6 flex items-center gap-2">
+            <span>📍</span> Pennsylvania, USA · happy to relocate
+          </p>
         </header>
 
         {/* RIGHT: architecture graph */}

@@ -1,4 +1,5 @@
 import Navbar from "./components/NavBar";
+import ScrollProgress from "./components/ScrollProgress";
 import Hero from "./sections/Hero";
 import ShowcaseSection from "./sections/ShowcaseSection";
 import FeatureCards from "./sections/FeatureCards";
@@ -12,6 +13,7 @@ import Footer from "./sections/Footer";
 
 const App = () => (
   <>
+    <ScrollProgress />
     <Navbar />
     <Hero />
     <FeatureCards />

@@ -101,14 +101,14 @@ const SystemGraph = () => {
         {/* edge labels */}
         <EdgeLabel x={170} y={173}>request</EdgeLabel>
         <EdgeLabel x={372} y={120}>cache</EdgeLabel>
-        <EdgeLabel x={362} y={174}>publish</EdgeLabel>
+        <EdgeLabel x={360} y={174}>enqueue</EdgeLabel>
         <EdgeLabel x={372} y={255}>query</EdgeLabel>
 
         {/* nodes */}
         <Node x="8" y="150" w="132" label="ingress" name="client" dot="#2dd4bf" />
         <Node x="200" y="150" w="132" label="service" name="FastAPI" dot="#2dd4bf" accent />
         <Node x="392" y="42" w="120" h="60" label="cache" name="Redis" dot="#e5484d" />
-        <Node x="392" y="153" w="120" h="60" label="queue" name="Kafka" dot="#a78bfa" />
+        <Node x="392" y="153" w="120" h="60" label="queue" name="Celery" dot="#a78bfa" />
         <Node x="392" y="264" w="120" h="60" label="database" name="Postgres" dot="#5b9bd5" />
       </svg>
 

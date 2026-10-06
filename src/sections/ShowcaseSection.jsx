@@ -4,12 +4,21 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 import TitleHeader from "../components/TitleHeader";
+import ProjectVisual from "../components/ProjectVisual";
 import { projects } from "../constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectCard = ({ project, cardRef }) => (
-  <div ref={cardRef} className="panel p-7 md:p-8 flex flex-col gap-5 h-full">
+  <div ref={cardRef} className="panel group p-6 md:p-7 flex flex-col gap-5 h-full">
+    {/* animated cover visual */}
+    <div
+      className="project-visual rounded-lg overflow-hidden border h-36 md:h-40"
+      style={{ borderColor: "var(--color-line)" }}
+    >
+      <ProjectVisual id={project.id} />
+    </div>
+
     {/* status line */}
     <div className="flex items-center justify-between mono text-xs">
       <span className="text-faint">{project.id}</span>
